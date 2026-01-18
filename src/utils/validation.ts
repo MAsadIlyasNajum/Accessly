@@ -1,0 +1,58 @@
+/*
+ * Created by Asad on 18 JAN 2026
+ */
+
+export type PasswordRequirement =
+  | 'length'
+  | 'capital'
+  | 'number'
+  | 'special';
+
+export const minLength = (s: string, n: number) => s.length >= n;
+
+export const isEmail = (s: string) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(s);
+};
+
+export const isValidPassword = (
+  password: string,
+  minLen = 6
+): { valid: boolean; missingRequirement?: PasswordRequirement } => {
+  if (password.length < minLen) {
+    return { valid: false, missingRequirement: 'length' };
+  }
+  if (!/[A-Z]/.test(password)) {
+    return { valid: false, missingRequirement: 'capital' };
+  }
+  if (!/[0-9]/.test(password)) {
+    return { valid: false, missingRequirement: 'number' };
+  }
+  if (!/[!@#$%^&*(),.?":{}|<>_\-~+=/\\[\]]/.test(password)) {
+    return { valid: false, missingRequirement: 'special' };
+  }
+
+  return { valid: true };
+};
+
+export const validatePassword = (
+  password: string
+): string | undefined => {
+  const { valid, missingRequirement } = isValidPassword(password);
+
+  if (valid) return undefined;
+
+  switch (missingRequirement) {
+    case 'length':
+      return 'passwordTooShort';
+    case 'capital':
+      return 'passwordMissingCapital';
+    case 'number':
+      return 'passwordMissingNumber';
+    case 'special':
+      return 'passwordMissingSpecial';
+    default:
+      return 'passwordRequirementsFail';
+  }
+};
+
