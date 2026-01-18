@@ -15,9 +15,9 @@ type Props = {
   disabled?: boolean;
 };
 
-const Button = forwardRef<React.ElementRef<typeof TouchableOpacity>, Props>(function Button( 
+const Button = forwardRef<React.ElementRef<typeof TouchableOpacity>, Props>(function Button(
   { title, onPress, style, variant = 'primary', loading = false, disabled = false },
-  ref 
+  ref
 ) {
   const { theme } = useTheme();
   const isPrimary = variant === 'primary';
@@ -43,9 +43,9 @@ const Button = forwardRef<React.ElementRef<typeof TouchableOpacity>, Props>(func
       {loading ? (
         <ActivityIndicator size="small" color={isPrimary ? theme.colors.secondary : (theme.colors.text as string)} />
       ) : null}
-      <RNText style={[styles.txt, { color: isPrimary ? theme.colors.secondary : theme.colors.text, marginLeft: loading ? 8 : 0 }]}>
+      {!loading && (<RNText style={[styles.txt, { color: isPrimary ? theme.colors.secondary : theme.colors.text, marginLeft: loading ? 8 : 0 }]}>
         {title}
-      </RNText>
+      </RNText>)}
     </TouchableOpacity>
   );
 });
