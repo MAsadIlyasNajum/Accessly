@@ -60,8 +60,8 @@ This app was created as part of an assignment with the following goals:
 ### 1️⃣ Clone the Repository
 
 ```bash
-https://github.com/MAsadIlyasNajum/AuthFlow.git
-cd AuthFlow
+https://github.com/MAsadIlyasNajum/Accessly.git
+cd Accessly
 ```
 
 ### 2️⃣ Install Dependencies
